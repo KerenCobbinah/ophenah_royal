@@ -1,40 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keren's Solar System</title>
-    <script src="script/aframe.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ophenah Royal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ivory: #fdf8f2;
+    --blush: #f5e8e0;
+    --rose: #8b2252;
+    --deep: #5a0f35;
+    --gold: #c9933a;
+    --gold-light: #e8c06a;
+    --charcoal: #1e1218;
+    --muted: #7a5560;
+  }
+  body {
+    background: #e8ddd6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    padding: 30px 16px;
+  }
+  .flyer {
+    width: 600px;
+    background: var(--ivory);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(90,15,53,0.25), 0 6px 20px rgba(0,0,0,0.12);
+  }
+  .top-bar {
+    height: 5px;
+    background: linear-gradient(90deg, var(--deep), var(--gold), var(--gold-light), var(--gold), var(--deep));
+  }
+  .header {
+    background: var(--deep);
+    padding: 44px 48px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,147,58,0.18) 0%, transparent 70%);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,147,58,0.10) 0%, transparent 70%);
+  }
+  .brand-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.85;
+  }
+  .brand-name {
+    font-family: 'Cinzel', serif;
+    font-size: 58px;
+    font-weight: 700;
+    color: var(--ivory);
+    line-height: 1.0;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+  }
+  .brand-name span {
+    display: block;
+    color: var(--gold-light);
+  }
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+    position: relative;
+    z-index: 1;
+  }
+  .divider-ornament .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .divider-ornament .diamond {
+    width: 6px; height: 6px;
+    background: var(--gold-light);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+  .tagline {
+    font-style: italic;
+    font-size: 18px;
+    color: rgba(253,248,242,0.75);
+    margin-top: 16px;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 1;
+  }
+  .images-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 145px;
+    overflow: hidden;
+  }
+  .img-cell {
+    overflow: hidden;
+    position: relative;
+  }
+  .img-cell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(90,15,53,0.15) 0%, rgba(90,15,53,0.35) 100%);
+  }
+  .img-cell img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.1) contrast(1.05);
+    transition: transform 0.6s ease;
+  }
+  .img-cell:hover img { transform: scale(1.06); }
+  .img-label {
+    position: absolute;
+    bottom: 8px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #fff;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .accent-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose), var(--gold), var(--gold-light), var(--gold), var(--rose));
+  }
+  .body-section {
+    padding: 36px 48px 32px;
+    background: var(--ivory);
+    position: relative;
+  }
+  .body-section::before {
+    content: '✦';
+    position: absolute;
+    top: 20px; right: 44px;
+    font-size: 60px;
+    color: rgba(139,34,82,0.05);
+    line-height: 1;
+  }
+  .section-eyebrow {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--deep);
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+  }
+  .product-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, var(--blush) 0%, rgba(245,232,224,0.4) 100%);
+    border-left: 2px solid var(--gold);
+  }
+  .product-icon { font-size: 16px; flex-shrink: 0; line-height: 1; }
+  .product-name {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--charcoal);
+    letter-spacing: 0.3px;
+  }
+  .more-item {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(139,34,82,0.06), rgba(201,147,58,0.08));
+    border-left: 2px solid var(--rose);
+    text-align: center;
+    justify-content: center;
+  }
+  .more-item .product-name {
+    font-style: italic;
+    color: var(--rose);
+    font-weight: 600;
+  }
+  .location-band {
+    background: var(--blush);
+    padding: 16px 48px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid rgba(139,34,82,0.12);
+    border-bottom: 1px solid rgba(139,34,82,0.12);
+  }
+  .location-text { font-size: 11px; color: var(--muted); letter-spacing: 0.3px; }
+  .location-text strong { color: var(--deep); font-weight: 600; }
+  .cta-section {
+    background: var(--deep);
+    padding: 28px 48px 32px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: -80px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,147,58,0.12) 0%, transparent 70%);
+  }
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,147,58,0.10) 0%, transparent 70%);
+  }
+  .cta-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    opacity: 0.7;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  a.cta-button { text-decoration: none; }
+  .cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+    color: var(--deep);
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 14px 40px;
+    margin-bottom: 22px;
+    position: relative;
+    z-index: 1;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .contact-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-icon { font-size: 18px; color: var(--gold-light); }
+  .contact-number {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+  .bottom-bar {
+    height: 5px;
+    background: linear-gradient(90deg, var(--deep), var(--gold), var(--gold-light), var(--gold), var(--deep));
+  }
+</style>
 </head>
 <body>
-    <a-scene>   
-
-        <!--Asset Management--> 
-        <a-assets>
-            <img id="sun" src="texture/2k_sun.jpg" alt="">
-            <img id="earth" src="texture/2k_earth_daymap.jpg" alt="">
-            <img id="moon" src="texture/2k_moon.jpg" alt="">
-            <img id="mars" src="texture/2k_mars.jpg" alt="">
-            <img id="stars" src="texture/2k_stars.jpg" alt="">  
-            <img id="milky_way" src="texture/2k_milky_way.jpg" alt="">
-            <img id="venus_surface" src="texture/2k_venus_surface.jpg" alt=""> 
-            <img id="venus_atmosphere" src="texture/2k_venus_atmosphere.jpg" alt="">
-            <img id="mercury.jpg"   src = "texture/2k_mercury.jpg" alt="">
-            <img id="jupiter.jpg"   src = "texture/2k_jupiter.jpg" alt="">
-            <img id="saturn.jpg"    src = "texture/2k_saturn.jpg" alt="">
-            <img id="saturn_ring"  src="texture/2k_saturn_ring_alpha.png" alt="">   
-            <img id="uranus.jpg"    src = "texture/2k_uranus.jpg" alt="">
-            <img id="neptune.jpg"   src = "texture/2k_neptune.jpg" alt="">  
-
-
-
-        </a-assets>
-
-        <!-- Sky-box - Milky Way -->
-        <a-sky src="#milky_way" rotation="0 -90 0"></a-sky>
-
-
-    
-    </a-scene>
+<div class="flyer">
+  <div class="top-bar"></div>
+  <div class="header">
+    <div class="brand-label">Est. — Premium Collection</div>
+    <div class="brand-name">
+      Ophenah
+      <span>Royal</span>
+    </div>
+    <div class="divider-ornament">
+      <div class="line"></div>
+      <div class="diamond"></div>
+      <div class="line"></div>
+    </div>
+    <div class="tagline">Where Luxury Meets Lifestyle</div>
+  </div>
+  <div class="images-strip">
+    <div class="img-cell">
+      <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=200&h=180&fit=crop" alt="Perfumes">
+      <div class="img-label">Perfumes</div>
+    </div>
+    <div class="img-cell">
+      <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=200&h=180&fit=crop" alt="Clothing">
+      <div class="img-label">Clothing</div>
+    </div>
+    <div class="img-cell">
+      <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=200&h=180&fit=crop" alt="Skincare">
+      <div class="img-label">Skincare</div>
+    </div>
+    <div class="img-cell">
+      <img src="https://images.unsplash.com/photo-1626806819282-2c1dc01a5e0c?w=200&h=180&fit=crop" alt="Appliances">
+      <div class="img-label">Appliances</div>
+    </div>
+  </div>
+  <div class="accent-bar"></div>
+  <div class="body-section">
+    <div class="section-eyebrow">Our Collections</div>
+    <div class="section-title">What We Offer</div>
+    <div class="products-grid">
+      <div class="product-item">
+        <span class="product-icon">🌸</span>
+        <span class="product-name">Perfumes</span>
+      </div>
+      <div class="product-item">
+        <span class="product-icon">👗</span>
+        <span class="product-name">Clothing & Apparel</span>
+      </div>
+      <div class="product-item">
+        <span class="product-icon">❄️</span>
+        <span class="product-name">Air Coolers</span>
+      </div>
+      <div class="product-item">
+        <span class="product-icon">🫧</span>
+        <span class="product-name">Washing Machines</span>
+      </div>
+      <div class="product-item">
+        <span class="product-icon">✨</span>
+        <span class="product-name">Skincare Products</span>
+      </div>
+      <div class="product-item">
+        <span class="product-icon">👜</span>
+        <span class="product-name">Bags & Accessories</span>
+      </div>
+      <div class="product-item more-item">
+        <span class="product-name">& Many More Luxury Items…</span>
+      </div>
+    </div>
+  </div>
+  <div class="location-band">
+    <span style="font-size:16px">📍</span>
+    <div class="location-text">
+      <strong>Estate — SOLANI Montessori School, Bibiani</strong>
+    </div>
+  </div>
+  <div class="cta-section">
+    <div class="cta-label">Get in Touch</div>
+    <a href="https://wa.me/233591157616" target="_blank" class="cta-button">Order Now</a>
+    <div class="contact-row">
+      <span class="contact-icon">📞</span>
+      <span class="contact-number">0591 157 616</span>
+    </div>
+  </div>
+  <div class="bottom-bar"></div>
+</div>
 </body>
 </html>
