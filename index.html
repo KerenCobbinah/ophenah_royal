@@ -114,7 +114,7 @@
   .images-strip {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    height: 145px;
+    grid-template-rows: repeat(2, 145px);
     overflow: hidden;
   }
   .img-cell {
@@ -125,7 +125,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(90,15,53,0.15) 0%, rgba(90,15,53,0.35) 100%);
+    background: linear-gradient(180deg, rgba(90,15,53,0.10) 0%, rgba(90,15,53,0.42) 100%);
   }
   .img-cell img {
     width: 100%;
@@ -147,6 +147,9 @@
     color: #fff;
     text-transform: uppercase;
     z-index: 2;
+  }
+  .img-cell:nth-child(n+5) {
+    border-top: 1px solid rgba(201,147,58,0.35);
   }
   .accent-bar {
     height: 3px;
@@ -294,13 +297,20 @@
     height: 5px;
     background: linear-gradient(90deg, var(--deep), var(--gold), var(--gold-light), var(--gold), var(--deep));
   }
+  .brand-logo img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.8));
+  }
 </style>
 </head>
 <body>
 <div class="flyer">
   <div class="top-bar"></div>
+
   <div class="header">
-    <div class="brand-label">Est. — Premium Collection</div>
+    <div class="brand-logo"><img src="ophenah-logo.png" alt=""></div>
     <div class="brand-name">
       Ophenah
       <span>Royal</span>
@@ -312,25 +322,49 @@
     </div>
     <div class="tagline">Where Luxury Meets Lifestyle</div>
   </div>
+
   <div class="images-strip">
+
+    <!-- Row 1 -->
     <div class="img-cell">
-      <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=200&h=180&fit=crop" alt="Perfumes">
-      <div class="img-label">Perfumes</div>
+      <img src="https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=200&h=145&fit=crop" alt="Perfumes">
+      <div class="img-label"></div>
     </div>
     <div class="img-cell">
-      <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=200&h=180&fit=crop" alt="Clothing">
-      <div class="img-label">Clothing</div>
+      <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=200&h=145&fit=crop" alt="Washing Machine">
+      <div class="img-label"></div>
     </div>
     <div class="img-cell">
-      <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=200&h=180&fit=crop" alt="Skincare">
-      <div class="img-label">Skincare</div>
+      <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=200&h=145&fit=crop" alt="Bags">
+      <div class="img-label"></div>
     </div>
     <div class="img-cell">
-      <img src="https://images.unsplash.com/photo-1626806819282-2c1dc01a5e0c?w=200&h=180&fit=crop" alt="Appliances">
-      <div class="img-label">Appliances</div>
+      <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=200&h=145&fit=crop" alt="Skincare">
+      <div class="img-label"></div>
     </div>
+
+    <!-- Row 2 -->
+    <div class="img-cell">
+      <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=200&h=145&fit=crop" alt="Clothing">
+      <div class="img-label"></div>
+    </div>
+    <div class="img-cell">
+      <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=200&h=145&fit=crop" alt="Jeans">
+      <div class="img-label"></div>
+    </div>
+    <div class="img-cell">
+      <img src="https://images.unsplash.com/photo-1626806819282-2c1dc01a5e0c?w=200&h=180&fit=crop" alt="Air Fryers">
+      <div class="img-label"></div>
+    </div>
+    <div class="img-cell">
+      <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=200&h=145&fit=crop" alt="Bathroom Shelf">
+      <div class="img-label"></div>
+    </div>
+
   </div>
+
   <div class="accent-bar"></div>
+
   <div class="body-section">
     <div class="section-eyebrow">Our Collections</div>
     <div class="section-title">What We Offer</div>
@@ -340,36 +374,46 @@
         <span class="product-name">Perfumes</span>
       </div>
       <div class="product-item">
-        <span class="product-icon">👗</span>
-        <span class="product-name">Clothing & Apparel</span>
-      </div>
-      <div class="product-item">
-        <span class="product-icon">❄️</span>
-        <span class="product-name">Air Coolers</span>
-      </div>
-      <div class="product-item">
         <span class="product-icon">🫧</span>
         <span class="product-name">Washing Machines</span>
+      </div>
+      <div class="product-item">
+        <span class="product-icon">👜</span>
+        <span class="product-name">Bags & Accessories</span>
       </div>
       <div class="product-item">
         <span class="product-icon">✨</span>
         <span class="product-name">Skincare Products</span>
       </div>
       <div class="product-item">
-        <span class="product-icon">👜</span>
-        <span class="product-name">Bags & Accessories</span>
+        <span class="product-icon">👗</span>
+        <span class="product-name">Clothing & Apparel</span>
+      </div>
+      <div class="product-item">
+        <span class="product-icon">👖</span>
+        <span class="product-name">Jeans & Denim</span>
+      </div>
+      <div class="product-item">
+        <span class="product-icon">🍟</span>
+        <span class="product-name">Air Fryers and more</span>
+      </div>
+      <div class="product-item">
+        <span class="product-icon">🛁</span>
+        <span class="product-name">Other home essentials</span>
       </div>
       <div class="product-item more-item">
-        <span class="product-name">& Many More Luxury Items…</span>
+        <span class="product-name">& Many More Luxury Items… What do you need!!</span>
       </div>
     </div>
   </div>
+
   <div class="location-band">
     <span style="font-size:16px">📍</span>
     <div class="location-text">
       <strong>Estate — SOLANI Montessori School, Bibiani</strong>
     </div>
   </div>
+
   <div class="cta-section">
     <div class="cta-label">Get in Touch</div>
     <a href="https://wa.me/233591157616" target="_blank" class="cta-button">Order Now</a>
@@ -378,6 +422,7 @@
       <span class="contact-number">0591 157 616</span>
     </div>
   </div>
+
   <div class="bottom-bar"></div>
 </div>
 </body>
